@@ -1,0 +1,6 @@
+package com.example.wooster_app
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}

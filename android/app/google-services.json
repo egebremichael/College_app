@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "239830084549",
+    "project_id": "scotcentral-8b54c",
+    "storage_bucket": "scotcentral-8b54c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239830084549:android:29172326efb8724fa2f9ac",
+        "android_client_info": {
+          "package_name": "com.example.wooster_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "239830084549-22ammo6fio257r10egq99f9q0ntt5kt0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0AE3TF0k0I960N164yLQFx2WC7PQRAKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "239830084549-22ammo6fio257r10egq99f9q0ntt5kt0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
