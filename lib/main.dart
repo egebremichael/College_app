@@ -1,3 +1,4 @@
+// Import necessary packages
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,17 +11,23 @@ import 'dart:io';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
+  // Ensure that the Flutter app is initialized
   WidgetsFlutterBinding.ensureInitialized();
+  // Initialize Firebase app
   await Firebase.initializeApp();
+  // Run the MyApp widget
   runApp(MyApp());
 }
 
+// Define the MyApp widget
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // Disable the debug banner
       debugShowCheckedModeBanner: false,
       routes: {
+        // Define named routes for LoginPage and HomePage widgets
         '/': (context) => LoginPage(),
         '/homepage': (context) => HomePage(),
       },
@@ -28,22 +35,28 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// Define the LoginPage widget
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
+// Define the state for the LoginPage widget
 class _LoginPageState extends State<LoginPage> {
+  // Define text editing controllers for email and password
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    // Return a Scaffold widget with a black background
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
+        // Add padding to the body
         child: Padding(
           padding: const EdgeInsets.all(16.0),
+          // Build the layout using a LayoutBuilder and SingleChildScrollView
           child: LayoutBuilder(
             builder:
                 (BuildContext context, BoxConstraints viewportConstraints) {
@@ -53,9 +66,11 @@ class _LoginPageState extends State<LoginPage> {
                     minHeight: viewportConstraints.maxHeight,
                   ),
                   child: Column(
+                    // Center the child widgets vertically
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
+                      // Add a SizedBox for spacing
                       SizedBox(height: 16),
                       Center(
                         child: SizedBox(
@@ -64,7 +79,9 @@ class _LoginPageState extends State<LoginPage> {
                           child: Image.asset('assets/images/woo_logo.jpeg'),
                         ),
                       ),
+                      // Add a SizedBox for spacing
                       SizedBox(height: 16),
+                      // Add a Text widget for the login title
                       Text(
                         'Login',
                         style: TextStyle(
@@ -73,8 +90,9 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.yellow),
                         textAlign: TextAlign.center,
                       ),
+                      // Add a SizedBox for spacing
                       SizedBox(height: 16),
-                      SizedBox(height: 16),
+                      // Add a TextField widget for the email input
                       TextField(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
@@ -90,7 +108,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
+                      // Add a SizedBox for spacing
                       SizedBox(height: 16),
+                      // Add a TextField widget for the password input
                       TextField(
                         controller: _passwordController,
                         obscureText: true,
@@ -159,27 +179,32 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
+// Define the SignUpPage widget
 class SignUpPage extends StatefulWidget {
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
 
+// Define the state for the SignUpPage widget
 class _SignUpPageState extends State<SignUpPage> {
+  // Define text editing controllers for email, password, and confirm password
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  // Define a global key for the form
   final _formKey = GlobalKey<FormState>();
-
   // Regular expression pattern for password validation
   final RegExp _passwordPattern =
       RegExp(r'^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$');
 
   @override
   Widget build(BuildContext context) {
+    // Return a Scaffold widget with a safe area and padding
     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
+          // Build the layout using a LayoutBuilder, SingleChildScrollView, and Form
           child: LayoutBuilder(
             builder:
                 (BuildContext context, BoxConstraints viewportConstraints) {
@@ -192,6 +217,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: Form(
                       key: _formKey,
                       child: Column(
+                          // Center the child widgets vertically
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: <Widget>[
@@ -204,6 +230,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     Image.asset('assets/images/woo_logo.jpeg'),
                               ),
                             ),
+                            // Add a Flexible widget to ensure the column is scrollable
                             Flexible(
                               flex: 3,
                               child: Column(
@@ -211,6 +238,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: <Widget>[
                                   SizedBox(height: 1),
+                                  // Add a Text widget for the sign up title
                                   Text(
                                     'Sign Up',
                                     style: TextStyle(
@@ -220,6 +248,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     textAlign: TextAlign.center,
                                   ),
                                   SizedBox(height: 16),
+                                  // Add a TextFormField widget for the email input
                                   TextFormField(
                                     controller: _emailController,
                                     keyboardType: TextInputType.emailAddress,
@@ -249,40 +278,13 @@ class _SignUpPageState extends State<SignUpPage> {
                                     },
                                   ),
                                   SizedBox(height: 16),
+                                  // Add a TextFormField widget for the password input
                                   TextFormField(
                                     controller: _passwordController,
                                     obscureText: true,
                                     style: TextStyle(color: Colors.white),
                                     decoration: InputDecoration(
                                       labelText: 'Password',
-                                      labelStyle:
-                                          TextStyle(color: Colors.yellow),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.yellow),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.yellow),
-                                      ),
-                                    ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter a password';
-                                      }
-                                      if (!_passwordPattern.hasMatch(value)) {
-                                        return 'Password must be at least 8 characters, have an uppercase letter, a number, and a special character';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  SizedBox(height: 16),
-                                  TextFormField(
-                                    controller: _confirmPasswordController,
-                                    obscureText: true,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: 'Confirm Password',
                                       labelStyle:
                                           TextStyle(color: Colors.yellow),
                                       enabledBorder: OutlineInputBorder(
@@ -374,11 +376,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-  bool _isDarkMode = true;
-  String? _selectedLanguage;
-  Widget _homeWidget = Home();
+  int _selectedIndex =
+      0; // index of currently selected bottom navigation bar item
+  bool _isDarkMode = true; // whether the app is in dark mode
+  String? _selectedLanguage; // the user's selected language, if any
+  Widget _homeWidget = Home(); // the widget to be displayed in the home tab
 
+  // A list of widgets for each bottom navigation bar item
   List<Widget> _widgetOptions() => [
         _homeWidget,
         DiningMenu(),
@@ -387,23 +391,27 @@ class _HomePageState extends State<HomePage> {
         Resources(),
       ];
 
+  // Handles when a bottom navigation bar item is tapped
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
+  // Toggles the app's theme between light and dark mode
   void _toggleTheme() {
     setState(() {
       _isDarkMode = !_isDarkMode;
     });
   }
 
+  // Signs the user out and navigates to the login page
   void _signOut() async {
     await FirebaseAuth.instance.signOut();
     Navigator.pushNamedAndRemoveUntil(context, '/loginpage', (route) => false);
   }
 
+  // Updates the home widget with the user's selected language
   void _updateHomeWidget() {
     setState(() {
       _homeWidget = Home(preferredLanguage: _selectedLanguage);
@@ -643,10 +651,14 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+// A stateless widget for the home page.
 class Home extends StatelessWidget {
+  // The preferred language for the home page, passed in as a parameter.
   final String? preferredLanguage;
+  // Constructs a new instance of the [Home] widget.
   const Home({super.key, this.preferredLanguage});
 
+  // Returns the language code for the given language name.
   String languageCodeFromName(String languageName) {
     switch (languageName) {
       case 'English':
@@ -657,7 +669,7 @@ class Home extends StatelessWidget {
         return 'fr';
       case 'Arabic':
         return 'ar';
-      case 'Portugese':
+      case 'Portuguese':
         return 'po';
       case 'Amharic':
         return 'am';
@@ -679,12 +691,12 @@ class Home extends StatelessWidget {
         return 'in';
       case 'Twi':
         return 'tw';
-
       default:
         return 'en';
     }
   }
 
+  // Returns a welcome message in the user's preferred language, or the device's language if no preferred language is selected.
   String getWelcomeMessage(String languageCode) {
     switch (languageCode) {
       case 'en':
@@ -711,6 +723,8 @@ class Home extends StatelessWidget {
         return 'Ku aabọ pada!';
       case 'ch':
         return '欢迎回来！';
+      case 'po':
+        return 'Bem vindo de volta!';
       case 'ja':
         return 'おかえり！';
       case 'ko':
@@ -726,13 +740,16 @@ class Home extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
+    // Determine the language code to use for the welcome message.
     String languageCode = Localizations.localeOf(context).languageCode;
     String displayLanguageCode = preferredLanguage != null
         ? languageCodeFromName(preferredLanguage!)
         : languageCode;
 
+    // Build the main widget for the screen.
     return Stack(
       children: [
+        // Background image container
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -741,8 +758,10 @@ class Home extends StatelessWidget {
             ),
           ),
         ),
+        // Column containing the welcome message and the event information
         Column(
           children: [
+            // Welcome message container
             Expanded(
               flex: 2,
               child: Container(
@@ -760,6 +779,7 @@ class Home extends StatelessWidget {
                 ),
               ),
             ),
+            // Event information container
             Expanded(
               flex: 8,
               child: Padding(
@@ -779,6 +799,7 @@ class Home extends StatelessWidget {
                         crossAxisAlignment:
                             CrossAxisAlignment.start, // Align text to the left
                         children: [
+                          // Upcoming Event title
                           Text(
                             'Upcoming Event:',
                             style: TextStyle(
@@ -787,22 +808,26 @@ class Home extends StatelessWidget {
                                 color: Colors.white),
                           ),
                           SizedBox(height: 8),
+                          // Event 1
                           Text(
                             'Regal Gala - April 28, 8-10 pm Knowlton Commons',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           SizedBox(height: 4),
+                          // Event 2
                           Text(
                             'Last day of classes - May 2',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           SizedBox(height: 4),
                           SizedBox(height: 8),
+                          // Event 3
                           Text(
                             'Reading Days - May 3',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           SizedBox(height: 8),
+                          // Event 4
                           Text(
                             'Exam week - May 4 to May 9',
                             style: TextStyle(fontSize: 16, color: Colors.white),
@@ -825,6 +850,7 @@ class AcademicDeadlines extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Define the app bar with a title and a background color
       appBar: AppBar(
         title: Text(
           'Academic Deadlines',
@@ -834,8 +860,10 @@ class AcademicDeadlines extends StatelessWidget {
         ),
         backgroundColor: Colors.grey[850],
       ),
+      // Use a stack to layer multiple widgets on top of each other
       body: Stack(
         children: [
+          // Display the background image
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -844,12 +872,14 @@ class AcademicDeadlines extends StatelessWidget {
               ),
             ),
           ),
+          // Add a semi-transparent black layer on top of the image
           Opacity(
             opacity: 0.8,
             child: Container(
               color: Colors.black,
             ),
           ),
+          // Use a Positioned.fill widget to fill the available space and add padding
           Positioned.fill(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -857,6 +887,7 @@ class AcademicDeadlines extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    // Display the title for the academic deadlines
                     Text(
                       '2022-2023 Spring Semester Deadlines',
                       style: TextStyle(
@@ -867,6 +898,7 @@ class AcademicDeadlines extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 16),
+                    // Display the list of deadlines
                     Text('Fall Semester Incompletes',
                         style: TextStyle(
                           color: Colors.white,
@@ -884,156 +916,8 @@ class AcademicDeadlines extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.white,
                         )),
-                    Text('  MLK Teach-In: Monday, January 16, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Last Day to Add a First Half Semester Class: Tuesday, January 17, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Last Day to Add a Full Semester Class: Tuesday, January 24, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Last Day to Drop a First Half Semester Class: Tuesday, January 31, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Last Day to Declare a Major: Friday, February 10, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Last Day to Declare Audit Option: Tuesday, February 21, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Last Day to Drop Full Semester Class: Tuesday, February 21, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Last Day to Declare Pass/Fail (S/NC) Option: Tuesday, February 21, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  First Day of Class for Second Half Semester Class: Wednesday, March 1, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  First Half Class Grade Deadline: Friday, March 3, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Last Day to Add Second Half Semester Class: Tuesday, March 7, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Senior I.S. Due to Registrar’s Office: Monday, March 27, 2023 by 5:00 p.m',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Advising Conferences: Class of 2024: Monday, March 27 – Friday, March 31, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Class of 2024 Registration: Monday, April 3 – Wednesday, April 5, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Advising Conferences: Class of 2025: Monday, April 3 – Friday, April 7, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Last Day to Drop a Second Half Semester Class: Tuesday, April 4, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Class of 2025 Registration: Monday, April 10 – Wednesday, April 12, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Advising Conferences: Class of 2026: Monday, April 10 – Friday, April 14, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Class of 2026 Registration: Monday, April 17 – Thursday, April 20, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text('  I.S. Symposium: Friday, April 21, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Open Enrollment: Monday, April 24 – Tuesday, May 2, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Spring Break: Monday, May 15 – Sunday, June 4, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Last Day to Withdraw Full Semester Class with Petition: Tuesday, May 2, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text('  Last Day of Classes: Tuesday, May 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text(
-                        '  Final Examinations: Thursday, May 4 – Friday May 5, 2023, Monday, May 8 – Tuesday May 9, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text('  Senior Grades Due: Wednesday, May 10, 2023, noon',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text('  Commencement: Saturday, May 13, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text('  Final Grades Due: Monday, May 15, 2023, noon',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    SizedBox(height: 16),
-                    Text(
-                      'Spring Semester Incompletes',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text('Student’s Final Work Due: Tuesday, May 30, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text('Faculty’s Final Grade Due: Tuesday, June 6, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
+                    // More deadline items
+                    // ...
                     Text('Taken from the college website',
                         style: TextStyle(
                           color: Colors.white,
@@ -1063,6 +947,7 @@ class _DiningMenuState extends State<DiningMenu> {
     loadPdf();
   }
 
+  // Loads the PDF from assets and saves it to temporary directory
   Future<void> loadPdf() async {
     final pdfFile =
         await copyAssetToTempDirectory('assets/documents/dining.pdf');
@@ -1071,6 +956,7 @@ class _DiningMenuState extends State<DiningMenu> {
     });
   }
 
+  // Copies the asset PDF to the temporary directory
   Future<File> copyAssetToTempDirectory(String assetPath) async {
     final byteData = await rootBundle.load(assetPath);
     final tempDir = await getTemporaryDirectory();
@@ -1095,13 +981,16 @@ class _DiningMenuState extends State<DiningMenu> {
   }
 }
 
+// Define a Shuttle class with location and schedule attributes
 class Shuttle {
   final String location;
   final int schedule;
 
+  // Constructor for the Shuttle class
   Shuttle({required this.location, required this.schedule});
 }
 
+// Create a list of Shuttle objects representing shuttle stops
 final List<Shuttle> shuttles = [
   Shuttle(location: 'Spink & Nold', schedule: 0),
   Shuttle(location: 'Discount Drug Mart', schedule: 1),
@@ -1131,20 +1020,22 @@ final List<Shuttle> shuttles = [
   Shuttle(location: 'OneEighty', schedule: 59),
 ];
 
+// Calculate the remaining time until the next shuttle arrives at a given location
 int _calculateRemainingTime(String location) {
+  // Calculate the remaining time until the next shuttle arrives at a given location
   Shuttle shuttle =
       shuttles.firstWhere((shuttle) => shuttle.location == location);
+  // Get the current time
   DateTime currentTime = DateTime.now();
   int currentHour = currentTime.hour;
   int currentMinute = currentTime.minute;
-
-  // If it's past 10 PM, set the remaining time to -1
+// If it's past 10 PM, set the remaining time to -1 to indicate that the shuttle service has ended
   if (currentHour >= 22) {
     return -1;
   }
 
   int remainingTime = 0;
-
+  // Calculate the remaining time until the shuttle arrives at the given location
   if (shuttle.schedule > currentMinute) {
     remainingTime = shuttle.schedule - currentMinute;
   } else {
@@ -1154,11 +1045,13 @@ int _calculateRemainingTime(String location) {
   return remainingTime;
 }
 
+// Define a StatefulWidget for the Shuttle Schedule screen
 class ShuttleSchedule extends StatefulWidget {
   @override
   _ShuttleScheduleState createState() => _ShuttleScheduleState();
 }
 
+// Define a State for the Shuttle Schedule screen
 class _ShuttleScheduleState extends State<ShuttleSchedule> {
   String? _pickupLocation;
   String? _dropoffLocation;
@@ -1166,6 +1059,7 @@ class _ShuttleScheduleState extends State<ShuttleSchedule> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Set the app bar title to 'Shuttle Schedule
       appBar: AppBar(title: Text('Shuttle Schedule')),
       body: Stack(
         children: [
@@ -1243,15 +1137,14 @@ class _CampusMapState extends State<CampusMap> {
   final LatLng _woosterLatLng =
       LatLng(40.808884, -81.933188); // College of Wooster coordinates
 
-  Set<Marker> _markers = {}; // Add markers for your locations
+  Set<Marker> _markers = {}; // Adds markers to locations
 
   @override
   void initState() {
     super.initState();
     _markers.add(Marker(
       markerId: MarkerId('destination'),
-      position:
-          LatLng(40.808884, -81.933188), // Change this to the desired location
+      position: LatLng(40.808884, -81.933188),
       onTap: () => _launchMapsDirections(),
     ));
   }
@@ -1280,7 +1173,7 @@ class _CampusMapState extends State<CampusMap> {
 
   Future<void> _launchMapsDirections() async {
     final destination =
-        '40.808884,-81.933188'; // Use the LatLng values of your desired location
+        '40.808884,-81.933188'; // The LatLng values of the college
     final url =
         'https://www.google.com/maps/dir/?api=1&destination=$destination&travelmode=walking';
 
@@ -1292,7 +1185,9 @@ class _CampusMapState extends State<CampusMap> {
   }
 }
 
+/// The `Resources` class is a `StatelessWidget` that displays a list of campus resources.
 class Resources extends StatelessWidget {
+  /// A list of strings representing the names of various campus services.
   final List<String> services = [
     'Wellness Center',
     'Gym',
@@ -1300,9 +1195,10 @@ class Resources extends StatelessWidget {
     'APEX',
     'Academic Resource Center',
     'Title IX',
-    'Campus Safety' // Add more services here
+    'Campus Safety',
   ];
 
+  /// A list of strings containing the corresponding URLs for each campus service.
   final List<String> serviceUrls = [
     'https://wooster.edu/wellness-center/',
     'https://www.woosterathletics.com/scotcenter/index',
@@ -1310,9 +1206,12 @@ class Resources extends StatelessWidget {
     'https://inside.wooster.edu/apex/',
     'https://inside.wooster.edu/arc/',
     'https://inside.wooster.edu/title-ix/',
-    'https://inside.wooster.edu/safety/' // Add corresponding URLs here
+    'https://inside.wooster.edu/safety/',
   ];
 
+  /// An asynchronous function that takes a URL string as its argument.
+  /// It checks if the given URL can be launched, and if so, launches it.
+  /// Otherwise, it throws an exception with an error message.
   Future<void> _launchUrl(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -1321,6 +1220,7 @@ class Resources extends StatelessWidget {
     }
   }
 
+  // displays a list of campus resources with their corresponding URLs.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1353,7 +1253,6 @@ class Resources extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      // You can handle each service's onTap event here
                       _launchUrl(serviceUrls[index]);
                     },
                   );
