@@ -212,6 +212,53 @@ The features in the resources tab aren't displayed when light mode is enabled.
 Limited number of languages available for selection due to lack of time for implememnting the Google translate API. 
 The Dining page only shows the dining menu pdf and it's hard to find the link to check meal swipes and flex balance. 
 
+## Troubleshooting Cocoapods Error
+
+If you encounter a CocoaPods error while building the app for iOS, follow these steps to resolve the issue:
+
+1. Install CocoaPods:
+
+If you haven't already installed CocoaPods on your development machine, you can do so by running the following command in your terminal:
+
+```
+sudo gem install cocoapods
+```
+
+2. Navigate to the `ios` directory:
+
+Change into the `ios` directory of your Flutter project by running:
+
+```
+cd ios
+```
+
+3. Run `pod install`:
+
+In the `ios` directory, run the following command to install the required CocoaPods dependencies:
+
+```
+pod install
+```
+
+This command will generate a `Podfile.lock` file and a `Pods` directory, which contains the installed dependencies.
+
+4. Return to the project root:
+
+Navigate back to the root directory of your Flutter project:
+
+```
+cd ..
+```
+
+5. Rebuild the app:
+
+Now, try rebuilding the app for iOS by running:
+
+```
+flutter run
+```
+
+If the CocoaPods error is resolved, the app should build and run successfully on an iOS device or simulator.
 
 
 
