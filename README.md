@@ -4,10 +4,10 @@ A Flutter-based mobile application designed to help students and faculty navigat
 
 ## Features
 
-- **Home Screen**: A welcome screen displaying the campus logo and other relevant information.
-- **Dining**: A list of on-campus dining options, their descriptions, and hours of operation. Displays each dining option with an image and basic details.
-- **Shuttle Schedule**: Allows users to view shuttle times for various stops on campus. Users can select their pickup and dropoff locations to see the estimated time for their shuttle arrival and departure.
-- **Map**: A campus map with important building locations to help users navigate the campus.
+- **Home Screen**: A welcome screen displaying the campus logo and upcoming events.
+- **Dining**: Dining News and a clickable link at the bottom of the pdf where students csan check their flex balances and meal swipes.
+- **Shuttle Schedule**: Allows users to view shuttle times for various stops in Wooster. Users can select their pickup and dropoff locations to see the estimated time for their shuttle arrival and departure.
+- **Map**: A campus map using Google maps API.
 - **Resources**: A list of campus resources such as the Wellness Center, Gym, Libraries, and more. Each resource can be tapped to open a corresponding website with more information.
 
 ## Installation
@@ -49,6 +49,24 @@ To customize the app, you can update the following files:
 - `lib/screens/resources.dart` for the Resources screen.
 
 Additionally, replace the placeholder images, texts, and URLs with the information relevant to your campus.
+
+# Overall Structure 
+Junior_IS/
+|-- android/                  # Android-specific project configuration and native code
+|-- assets/                   # Contains image assets used within the app
+|-- build/                    # Build output files (generated during the build process)
+|-- ios/                      # iOS-specific project configuration and native code
+|-- lib/                      # Contains the main Dart code for the app (main.dart, widgets, screens, etc.)
+|-- linux/                    # Linux-specific project configuration and native code
+|-- macos/                    # macOS-specific project configuration and native code
+|-- pubspec.lock              # A generated file containing the exact package versions used in the project
+|-- pubspec.yaml              # Contains metadata about the project and dependencies
+|-- README.md                 # A markdown file containing information about the project
+|-- test/                     # Contains tests for the app
+|-- web/                      # Web-specific project configuration and code
+|-- windows/                  # Windows-specific project configuration and native code
+|-- wooster_app.iml           # Project configuration file for IntelliJ-based IDEs (Android Studio, IntelliJ IDEA)
+
 
 
 # Flutter Application Setup
@@ -134,4 +152,15 @@ If you prefer using Visual Studio Code as your code editor, follow these steps t
 3. Open your Flutter project in Visual Studio Code:
 
    - Go to `File > Open Folder`, and select the root folder of your Flutter project.
-   - VS Code will automatically
+   - VS Code will automatically detect the Flutter project and configure itself to use the Flutter and Dart extensions.
+4. Run the Flutter project:
+    Open the terminal in VS Code (Ctrl + `).
+    Type flutter run and hit Enter. This command will build and run your Flutter app on a connected device or emulator.
+    
+# Usage 
+
+
+
+
+
+
