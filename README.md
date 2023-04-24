@@ -188,13 +188,21 @@ To view the shuttle schedule, tap the "Shuttle Schedule" icon. On the Shuttle Sc
 
 ### Campus Map
 
-To view the campus map, tap the "Map" icon. It uses Google Maps API and is linked to the internet.
+To view the campus map, tap the "Map" icon. It uses Google Maps API and is linked to the internet.(not fully implemented)
 
 ### Resources
 
 To access a list of campus resources, tap the "Resources" icon. The Resources screen displays a list of various campus resources, such as the Wellness Center, Gym, Libraries, and more. Each resource is clickable and will open a corresponding website with more information when tapped.
 
 By following these simple steps, you can easily navigate the Scot Central App and make the most of its features. 
+
+### Settings 
+
+To access the settings which contains the light/dark mode, changing welcome message preferences or log out, click on the settings button on the top right corner of the app.
+
+### Additional Feature
+
+To access semester academic deadlines, click on the hamburger menu and click on the academic deadlines tab. (doesn't look so good right now)
 
 
 
