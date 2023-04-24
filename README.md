@@ -133,14 +133,5 @@ If you prefer using Visual Studio Code as your code editor, follow these steps t
 
 3. Open your Flutter project in Visual Studio Code:
 
-  -Install Visual Studio Code from this link: https://code.visualstudio.com/
-  -Install the Flutter and Dart extensions:
-  -Launch Visual Studio Code.
-  -Go to Extensions (Ctrl + Shift + X) or click on the Extensions icon in the Activity Bar on the side of the window.
-  -Search for "Flutter" and click on "Install" (this will also install the Dart extension).
-  -Open your Flutter project in Visual Studio Code:
-  -Go to File > Open Folder, and select the root folder of your Flutter project.
-  -VS Code will automatically detect the Flutter project and configure itself to use the Flutter and Dart extensions.
-  -Run the Flutter project:
-  -Open the terminal in VS Code (Ctrl + `).
-  -Type flutter run and hit Enter. This command will build and run your Flutter app on a connected device or emulator.
+   - Go to `File > Open Folder`, and select the root folder of your Flutter project.
+   - VS Code will automatically
