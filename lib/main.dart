@@ -368,46 +368,6 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 }
 
-String languageCodeFromName(String languageName) {
-  switch (languageName) {
-    case 'English':
-      return 'en';
-    case 'Español':
-      return 'es';
-    case 'Arabic':
-      return 'ar';
-    case 'Amharic':
-      return 'am';
-    // Add more languages here
-    default:
-      return 'en';
-  }
-}
-
-String getWelcomeMessage(String languageCode) {
-  switch (languageCode) {
-    case 'en':
-      return 'Welcome back!';
-    case 'es':
-      return 'Bienvenido de nuevo!';
-    case 'fr':
-      return 'Bienvenue à nouveau!';
-    case 'ar':
-      return 'مرحبًا بعودتك!';
-    case 'ni':
-      return 'ku aabọ pada!';
-    case 'am':
-      return 'እንኳን ደህና መጡ!';
-    case 'mo':
-      return 'Буцаад тавтай морил';
-    case 'po':
-      return 'Bem vindo de volta!';
-    // Add more languages here
-    default:
-      return 'Welcome back!';
-  }
-}
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -424,7 +384,7 @@ class _HomePageState extends State<HomePage> {
         DiningMenu(),
         ShuttleSchedule(),
         CampusMap(),
-        HelpCenter(),
+        Resources(),
       ];
 
   void _onItemTapped(int index) {
@@ -547,31 +507,65 @@ class _HomePageState extends State<HomePage> {
                   value: _selectedLanguage,
                   items: [
                     DropdownMenuItem(
-                      value: 'English',
-                      child: Text('English'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Español',
-                      child: Text('Español'),
+                      value: 'Amharic',
+                      child: Text('Amharic'),
                     ),
                     DropdownMenuItem(
                       value: 'Arabic',
                       child: Text('Arabic'),
                     ),
                     DropdownMenuItem(
-                      value: 'Amharic',
-                      child: Text('Amharic'),
+                      value: 'Chinese',
+                      child: Text('Chinese'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'English',
+                      child: Text('English'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'French',
+                      child: Text('French'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Hindi',
+                      child: Text('Hindi'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Japanese',
+                      child: Text('Japanese'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Korean',
+                      child: Text('Korean'),
                     ),
                     DropdownMenuItem(
                       value: 'Mongolian',
                       child: Text('Mongolian'),
                     ),
                     DropdownMenuItem(
+                      value: 'Nepali',
+                      child: Text('Nepali'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Portuguese',
+                      child: Text('Portuguese'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Spanish',
+                      child: Text('Spanish'),
+                    ),
+                    DropdownMenuItem(
                       value: 'Kinyarwanda',
                       child: Text('Kinyarwanda'),
                     ),
-                    //
-                    //
+                    DropdownMenuItem(
+                      value: 'Twi',
+                      child: Text('Twi'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Yoruba',
+                      child: Text('Yoruba'),
+                    ),
                   ],
                   onChanged: (String? newValue) {
                     setState(() {
@@ -593,6 +587,7 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Center(child: _widgetOptions().elementAt(_selectedIndex)),
         bottomNavigationBar: BottomNavigationBar(
+          unselectedItemColor: Colors.grey[500],
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -607,12 +602,12 @@ class _HomePageState extends State<HomePage> {
               label: 'Shuttle',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.map),
+              icon: Icon(Icons.location_pin),
               label: 'Map',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.help_center),
-              label: 'Help Center',
+              icon: Icon(Icons.school),
+              label: 'Resources',
             ),
           ],
           currentIndex: _selectedIndex,
@@ -656,8 +651,10 @@ class Home extends StatelessWidget {
     switch (languageName) {
       case 'English':
         return 'en';
-      case 'Español':
+      case 'Spanish':
         return 'es';
+      case 'French':
+        return 'fr';
       case 'Arabic':
         return 'ar';
       case 'Portugese':
@@ -666,8 +663,23 @@ class Home extends StatelessWidget {
         return 'am';
       case 'Mongolian':
         return 'mo';
+      case 'Japanese':
+        return 'ja';
+      case 'Chinese':
+        return 'ch';
       case 'Kinyarwanda':
         return 'rw';
+      case 'Korean':
+        return 'ko';
+      case 'Nepali':
+        return 'ne';
+      case 'Yoruba':
+        return 'ni';
+      case 'Hindi':
+        return 'in';
+      case 'Twi':
+        return 'tw';
+
       default:
         return 'en';
     }
@@ -677,7 +689,7 @@ class Home extends StatelessWidget {
     switch (languageCode) {
       case 'en':
         return 'Welcome back!';
-      case 'es':
+      case 'sp':
         return 'Bienvenido de nuevo!';
       case 'fr':
         return 'Bienvenue à nouveau!';
@@ -693,6 +705,20 @@ class Home extends StatelessWidget {
         return 'Bem vindo de volta!';
       case 'rw':
         return 'Murakaza neza!';
+      case 'tw':
+        return 'Akwaaba!';
+      case 'ni':
+        return 'Ku aabọ pada!';
+      case 'ch':
+        return '欢迎回来！';
+      case 'ja':
+        return 'おかえり！';
+      case 'ko':
+        return '다시 오신 것을 환영합니다!';
+      case 'in':
+        return 'वापसी पर स्वागत है!';
+      case 'ne':
+        return 'फिर्ता आउनु भएकोमा स्वागत छ!';
       // Add more languages here
       default:
         return 'Welcome back!';
@@ -722,7 +748,7 @@ class Home extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
+                  color: Colors.black.withOpacity(0.7),
                   borderRadius: BorderRadius.circular(2),
                 ),
                 child: Center(
@@ -746,14 +772,15 @@ class Home extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.5),
+                        color: Colors.black.withOpacity(0.7),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment:
+                            CrossAxisAlignment.start, // Align text to the left
                         children: [
                           Text(
-                            'Upcoming Events:',
+                            'Upcoming Event:',
                             style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -761,16 +788,25 @@ class Home extends StatelessWidget {
                           ),
                           SizedBox(height: 8),
                           Text(
-                            'Event 1 - Date & Time',
+                            'Regal Gala - April 28, 8-10 pm Knowlton Commons',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           SizedBox(height: 4),
                           Text(
-                            'Event 2 - Date & Time',
+                            'Last day of classes - May 2',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           SizedBox(height: 4),
-                          // Add more events here
+                          SizedBox(height: 8),
+                          Text(
+                            'Reading Days - May 3',
+                            style: TextStyle(fontSize: 16, color: Colors.white),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            'Exam week - May 4 to May 9',
+                            style: TextStyle(fontSize: 16, color: Colors.white),
+                          ),
                         ],
                       ),
                     ),
@@ -781,55 +817,6 @@ class Home extends StatelessWidget {
           ],
         ),
       ],
-    );
-  }
-}
-
-class Events extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16), // Add some padding to the container
-      decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.6), // Darken the background
-        image: DecorationImage(
-          image: AssetImage('assets/images/woo_img.jpeg'),
-          fit: BoxFit.cover,
-          colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.6), BlendMode.srcATop),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
-        children: [
-          Text(
-            'Upcoming Event:',
-            style: TextStyle(
-                fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-          SizedBox(height: 8),
-          Text(
-            'Regal Gala - April 28, 8-10 pm Knowlton Commons',
-            style: TextStyle(fontSize: 16, color: Colors.white),
-          ),
-          SizedBox(height: 4),
-          Text(
-            'Last day of classes - May 2',
-            style: TextStyle(fontSize: 16, color: Colors.white),
-          ),
-          SizedBox(height: 4),
-          SizedBox(height: 8),
-          Text(
-            'Reading Days - May 3',
-            style: TextStyle(fontSize: 16, color: Colors.white),
-          ),
-          SizedBox(height: 8),
-          Text(
-            'Exam week - May 4 to May 9',
-            style: TextStyle(fontSize: 16, color: Colors.white),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -1110,16 +1097,38 @@ class _DiningMenuState extends State<DiningMenu> {
 
 class Shuttle {
   final String location;
-  final List<int> schedule;
+  final int schedule;
 
   Shuttle({required this.location, required this.schedule});
 }
 
 final List<Shuttle> shuttles = [
-  Shuttle(location: 'Lowry Circle', schedule: [2, 32]),
-  Shuttle(location: 'Beall and Wayne', schedule: [10, 40]),
-  Shuttle(location: 'Walmart', schedule: [15, 45]),
-  Shuttle(location: 'Buelhers', schedule: [20, 50]),
+  Shuttle(location: 'Spink & Nold', schedule: 0),
+  Shuttle(location: 'Discount Drug Mart', schedule: 1),
+  Shuttle(location: 'Lowry Circle', schedule: 2),
+  Shuttle(location: 'Williamsburg Apartments', schedule: 4),
+  Shuttle(location: 'Wooster Hospital', schedule: 5),
+  Shuttle(location: 'Save A Lot', schedule: 5),
+  Shuttle(location: 'College Hills', schedule: 8),
+  Shuttle(location: 'Spruce Hill Apts.', schedule: 9),
+  Shuttle(location: 'Northgate & Cleveland', schedule: 13),
+  Shuttle(location: 'Freedlander Park', schedule: 15),
+  Shuttle(location: 'Walmart Supercenter', schedule: 19),
+  Shuttle(location: 'Movies 10', schedule: 23),
+  Shuttle(location: 'Dollar Tree', schedule: 24),
+  Shuttle(location: 'Buehler\'s Milltown', schedule: 26),
+  Shuttle(location: 'Children\'s Services', schedule: 29),
+  Shuttle(location: 'Reed & Burbank', schedule: 30),
+  Shuttle(location: 'Cleveland Clinic', schedule: 32),
+  Shuttle(location: 'Wayne & Beall', schedule: 34),
+  Shuttle(location: 'University & Palmer', schedule: 36),
+  Shuttle(location: 'Community Action', schedule: 38),
+  Shuttle(location: 'Best Western', schedule: 40),
+  Shuttle(location: 'Family Dollar', schedule: 53),
+  Shuttle(location: 'Bowman & Grant', schedule: 54),
+  Shuttle(location: 'Buehler\'s Towne Market', schedule: 56),
+  Shuttle(location: 'North & Buckeye', schedule: 58),
+  Shuttle(location: 'OneEighty', schedule: 59),
 ];
 
 int _calculateRemainingTime(String location) {
@@ -1136,16 +1145,10 @@ int _calculateRemainingTime(String location) {
 
   int remainingTime = 0;
 
-  for (int time in shuttle.schedule) {
-    if (time > currentMinute) {
-      remainingTime = time - currentMinute;
-      break;
-    }
-  }
-
-  // If no matching time is found, calculate the time remaining until the next hour
-  if (remainingTime == 0) {
-    remainingTime = (60 - currentMinute) + shuttle.schedule[0];
+  if (shuttle.schedule > currentMinute) {
+    remainingTime = shuttle.schedule - currentMinute;
+  } else {
+    remainingTime = (60 - currentMinute) + shuttle.schedule;
   }
 
   return remainingTime;
@@ -1157,20 +1160,13 @@ class ShuttleSchedule extends StatefulWidget {
 }
 
 class _ShuttleScheduleState extends State<ShuttleSchedule> {
-  // Remove this list
-  // final List<String> locations = [
-  //   'Lowry Circle',
-  //   'Beall and Wayne',
-  //   'Walmart',
-  //   'Buelhers',
-  // ];
-
-  String? _selectedLocation;
-  int? _remainingTime;
+  String? _pickupLocation;
+  String? _dropoffLocation;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Shuttle Schedule')),
       body: Stack(
         children: [
           Container(
@@ -1179,40 +1175,53 @@ class _ShuttleScheduleState extends State<ShuttleSchedule> {
                 image: AssetImage(
                     'assets/images/shuttle_bg.jpeg'), // Replace with your transit image
                 fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.1), BlendMode.dstATop),
               ),
             ),
           ),
-          Container(
-            color: Colors.black.withOpacity(0.8),
-          ),
-          Center(
+          Padding(
+            padding: EdgeInsets.all(16),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 16),
+                Text('Pickup Location:'),
                 DropdownButton<String>(
-                  hint: Text('Select a location'),
-                  value: _selectedLocation,
-                  items: shuttles.map((Shuttle shuttle) {
-                    return DropdownMenuItem<String>(
+                  value: _pickupLocation,
+                  items: shuttles.map((shuttle) {
+                    return DropdownMenuItem(
                       value: shuttle.location,
                       child: Text(shuttle.location),
                     );
                   }).toList(),
                   onChanged: (String? newValue) {
                     setState(() {
-                      _selectedLocation = newValue;
-                      _remainingTime = _calculateRemainingTime(newValue!);
+                      _pickupLocation = newValue;
                     });
                   },
                 ),
-                SizedBox(height: 20),
-                if (_selectedLocation != null && _remainingTime != null)
+                SizedBox(height: 16),
+                Text('Dropoff Location:'),
+                DropdownButton<String>(
+                  value: _dropoffLocation,
+                  items: shuttles.map((shuttle) {
+                    return DropdownMenuItem(
+                      value: shuttle.location,
+                      child: Text(shuttle.location),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _dropoffLocation = newValue;
+                    });
+                  },
+                ),
+                SizedBox(height: 16),
+                if (_pickupLocation != null && _dropoffLocation != null)
                   Text(
-                    _remainingTime == -1
-                        ? 'The Wooster Transit is no longer available at $_selectedLocation for today.'
-                        : 'The Wooster Transit will be at $_selectedLocation in $_remainingTime minutes',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white),
+                    'You will be picked up in ${_calculateRemainingTime(_pickupLocation!)} minutes (${DateTime.now().add(Duration(minutes: _calculateRemainingTime(_pickupLocation!))).toIso8601String().substring(11, 16)}) and will be dropped off at $_dropoffLocation at ${DateTime.now().add(Duration(minutes: _calculateRemainingTime(_pickupLocation!) + _calculateRemainingTime(_dropoffLocation!))).toIso8601String().substring(11, 16)}.',
+                    style: TextStyle(fontSize: 16),
                   ),
               ],
             ),
@@ -1283,20 +1292,40 @@ class _CampusMapState extends State<CampusMap> {
   }
 }
 
-class HelpCenter extends StatelessWidget {
+class Resources extends StatelessWidget {
   final List<String> services = [
     'Wellness Center',
-    'Academic Center',
-    'APEX',
     'Gym',
-    'Libraries' // Add more services here
+    'Libraries',
+    'APEX',
+    'Academic Resource Center',
+    'Title IX',
+    'Campus Safety' // Add more services here
   ];
+
+  final List<String> serviceUrls = [
+    'https://wooster.edu/wellness-center/',
+    'https://www.woosterathletics.com/scotcenter/index',
+    'https://wooster.edu/library/library-hours/',
+    'https://inside.wooster.edu/apex/',
+    'https://inside.wooster.edu/arc/',
+    'https://inside.wooster.edu/title-ix/',
+    'https://inside.wooster.edu/safety/' // Add corresponding URLs here
+  ];
+
+  Future<void> _launchUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Help Center'),
+        title: Text('Campus Resources'),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -1304,7 +1333,7 @@ class HelpCenter extends StatelessWidget {
             image: AssetImage('assets/images/woo_logo.png'),
             fit: BoxFit.contain,
             colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.8),
+              Colors.black.withOpacity(0.9),
               BlendMode.darken,
             ),
           ),
@@ -1312,17 +1341,6 @@ class HelpCenter extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'Which of these college services do you need help with?',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
             Expanded(
               child: ListView.builder(
                 itemCount: services.length,
@@ -1336,7 +1354,7 @@ class HelpCenter extends StatelessWidget {
                     ),
                     onTap: () {
                       // You can handle each service's onTap event here
-                      print('Tapped on ${services[index]}');
+                      _launchUrl(serviceUrls[index]);
                     },
                   );
                 },
