@@ -1,4 +1,4 @@
-# College Campus App
+# Scot Central App
 
 A Flutter-based mobile application designed to help students and faculty navigate the college campus and access important resources.
 
@@ -17,13 +17,13 @@ To get started with this project, first clone the repository and make sure you h
 1. Clone the repository:
 
 ```
-git clone https://github.com/yourusername/college_campus_app.git
+git clone https://github.com/yourusername/Juniot_IS.git
 ```
 
 2. Change into the project directory:
 
 ```
-cd college_campus_app
+cd Junior_IS
 ```
 
 3. Install the required dependencies:
@@ -50,9 +50,6 @@ To customize the app, you can update the following files:
 
 Additionally, replace the placeholder images, texts, and URLs with the information relevant to your campus.
 
-## License
-
-This project is open-source and available for free use and modification under the terms of the [MIT License](LICENSE).
 
 # Flutter Application Setup
 
@@ -136,5 +133,14 @@ If you prefer using Visual Studio Code as your code editor, follow these steps t
 
 3. Open your Flutter project in Visual Studio Code:
 
-   - Go to `File > Open Folder`, and select the root folder of your Flutter project.
-   - VS Code will automatically
+  -Install Visual Studio Code from this link: https://code.visualstudio.com/
+  -Install the Flutter and Dart extensions:
+  -Launch Visual Studio Code.
+  -Go to Extensions (Ctrl + Shift + X) or click on the Extensions icon in the Activity Bar on the side of the window.
+  -Search for "Flutter" and click on "Install" (this will also install the Dart extension).
+  -Open your Flutter project in Visual Studio Code:
+  -Go to File > Open Folder, and select the root folder of your Flutter project.
+  -VS Code will automatically detect the Flutter project and configure itself to use the Flutter and Dart extensions.
+  -Run the Flutter project:
+  -Open the terminal in VS Code (Ctrl + `).
+  -Type flutter run and hit Enter. This command will build and run your Flutter app on a connected device or emulator.
