@@ -234,10 +234,12 @@ cd ios
 
 3. Run `pod install`:
 
-In the `ios` directory, run the following command to install the required CocoaPods dependencies:
+In the `ios` directory, run the following commands to install the required CocoaPods dependencies:
 
 ```
 pod install
+pod update Firebase/CoreOnly
+
 ```
 
 This command will generate a `Podfile.lock` file and a `Pods` directory, which contains the installed dependencies.
