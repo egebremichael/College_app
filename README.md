@@ -171,7 +171,30 @@ If you prefer using Visual Studio Code as your code editor, follow these steps t
     Open the terminal in VS Code (Ctrl + `).
     Type flutter run and hit Enter. This command will build and run your Flutter app on a connected device or emulator.
     
-# Usage 
+# How to Use the App
+
+
+### Home Screen
+
+When you open the app, you will be greeted by the Home screen, which displays the campus logo and a welcome message. This screen serves as the starting point for using the app. You can see an upcoming events widget displaying events that will be happening soon.
+
+### Dining
+
+To access information about on-campus dining options, tap the "Dining" icon. This will open the Dining screen where you can see the dining news. Simply scroll through the list to view the news and you can also find a link to check flex balance and meal swipes.
+
+### Shuttle Schedule
+
+To view the shuttle schedule, tap the "Shuttle Schedule" icon. On the Shuttle Schedule screen, you can select your pickup and dropoff locations to see the estimated time for your shuttle arrival and departure. 
+
+### Campus Map
+
+To view the campus map, tap the "Map" icon. It uses Google Maps API and is linked to the internet.
+
+### Resources
+
+To access a list of campus resources, tap the "Resources" icon. The Resources screen displays a list of various campus resources, such as the Wellness Center, Gym, Libraries, and more. Each resource is clickable and will open a corresponding website with more information when tapped.
+
+By following these simple steps, you can easily navigate the Scot Central App and make the most of its features. 
 
 
 
