@@ -52,20 +52,34 @@ Additionally, replace the placeholder images, texts, and URLs with the informati
 
 # Overall Structure 
 Junior_IS/
-|-- android/                  # Android-specific project configuration and native code
-|-- assets/                   # Contains image assets used within the app
-|-- build/                    # Build output files (generated during the build process)
-|-- ios/                      # iOS-specific project configuration and native code
-|-- lib/                      # Contains the main Dart code for the app (main.dart, widgets, screens, etc.)
-|-- linux/                    # Linux-specific project configuration and native code
-|-- macos/                    # macOS-specific project configuration and native code
-|-- pubspec.lock              # A generated file containing the exact package versions used in the project
-|-- pubspec.yaml              # Contains metadata about the project and dependencies
-|-- README.md                 # A markdown file containing information about the project
-|-- test/                     # Contains tests for the app
-|-- web/                      # Web-specific project configuration and code
-|-- windows/                  # Windows-specific project configuration and native code
-|-- wooster_app.iml           # Project configuration file for IntelliJ-based IDEs (Android Studio, IntelliJ IDEA)
+|-- android/                  # Android-specific project configuration and native code. 
+
+|-- assets/                   # Contains image assets used within the app. 
+
+|-- build/                    # Build output files (generated during the build process). 
+
+|-- ios/                      # iOS-specific project configuration and native code. 
+
+|-- lib/                      # Contains the main Dart code for the app (main.dart, widgets, screens, etc.). 
+
+|-- linux/                    # Linux-specific project configuration and native code. 
+
+|-- macos/                    # macOS-specific project configuration and native code. 
+
+|-- pubspec.lock              # A generated file containing the exact package versions used in the project. 
+
+|-- pubspec.yaml              # Contains metadata about the project and dependencies. 
+
+|-- README.md                 # A markdown file containing information about the project. 
+
+|-- test/                     # Contains tests for the app. 
+
+|-- web/                      # Web-specific project configuration and code. 
+
+|-- windows/                  # Windows-specific project configuration and native code. 
+
+|-- wooster_app.iml           # Project configuration file for IntelliJ-based IDEs (Android Studio, IntelliJ IDEA). 
+
 
 
 
