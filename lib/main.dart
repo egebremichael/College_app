@@ -1185,9 +1185,9 @@ class _CampusMapState extends State<CampusMap> {
   }
 }
 
-/// The `Resources` class is a `StatelessWidget` that displays a list of campus resources.
+// displays a list of campus resources.
 class Resources extends StatelessWidget {
-  /// A list of strings representing the names of various campus services.
+  // A list of strings representing the names of various campus services.
   final List<String> services = [
     'Wellness Center',
     'Gym',
@@ -1198,7 +1198,7 @@ class Resources extends StatelessWidget {
     'Campus Safety',
   ];
 
-  /// A list of strings containing the corresponding URLs for each campus service.
+  // A list of strings containing the corresponding URLs for each campus service.
   final List<String> serviceUrls = [
     'https://wooster.edu/wellness-center/',
     'https://www.woosterathletics.com/scotcenter/index',
@@ -1209,9 +1209,9 @@ class Resources extends StatelessWidget {
     'https://inside.wooster.edu/safety/',
   ];
 
-  /// An asynchronous function that takes a URL string as its argument.
-  /// It checks if the given URL can be launched, and if so, launches it.
-  /// Otherwise, it throws an exception with an error message.
+  // An asynchronous function that takes a URL string as its argument.
+  // It checks if the given URL can be launched, and if so, launches it.
+  // Otherwise, it throws an exception with an error message.
   Future<void> _launchUrl(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
