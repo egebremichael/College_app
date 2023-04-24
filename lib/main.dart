@@ -179,163 +179,190 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-// Define the SignUpPage widget
 class SignUpPage extends StatefulWidget {
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-// Define the state for the SignUpPage widget
 class _SignUpPageState extends State<SignUpPage> {
-  // Define text editing controllers for email, password, and confirm password
+  // Controllers for text fields
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  // Define a global key for the form
+
+  // Key for form validation
   final _formKey = GlobalKey<FormState>();
+
   // Regular expression pattern for password validation
   final RegExp _passwordPattern =
       RegExp(r'^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$');
 
   @override
   Widget build(BuildContext context) {
-    // Return a Scaffold widget with a safe area and padding
     return Scaffold(
+      backgroundColor: Colors.black, // Set background color to black
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          // Build the layout using a LayoutBuilder, SingleChildScrollView, and Form
           child: LayoutBuilder(
             builder:
                 (BuildContext context, BoxConstraints viewportConstraints) {
               return SingleChildScrollView(
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
-                    minHeight: viewportConstraints.maxHeight,
+                    minHeight: viewportConstraints
+                        .maxHeight, // Minimum height constraint for SingleChildScrollView
                   ),
                   child: IntrinsicHeight(
                     child: Form(
                       key: _formKey,
                       child: Column(
-                          // Center the child widgets vertically
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            SizedBox(height: 16),
-                            Center(
-                              child: SizedBox(
-                                width: 150,
-                                height: 150,
-                                child:
-                                    Image.asset('assets/images/woo_logo.jpeg'),
-                              ),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          SizedBox(height: 16),
+                          // Display the logo
+                          Center(
+                            child: SizedBox(
+                              width: 150,
+                              height: 150,
+                              child: Image.asset('assets/images/woo_logo.jpeg'),
                             ),
-                            // Add a Flexible widget to ensure the column is scrollable
-                            Flexible(
-                              flex: 3,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: <Widget>[
-                                  SizedBox(height: 1),
-                                  // Add a Text widget for the sign up title
-                                  Text(
-                                    'Sign Up',
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.yellow),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  SizedBox(height: 16),
-                                  // Add a TextFormField widget for the email input
-                                  TextFormField(
-                                    controller: _emailController,
-                                    keyboardType: TextInputType.emailAddress,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: 'Email',
-                                      labelStyle:
-                                          TextStyle(color: Colors.yellow),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.yellow),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.yellow),
-                                      ),
+                          ),
+                          Flexible(
+                            flex: 3,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                SizedBox(height: 1),
+                                // Sign Up header
+                                Text(
+                                  'Sign Up',
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.yellow),
+                                  textAlign: TextAlign.center,
+                                ),
+                                SizedBox(height: 16),
+                                // Email TextFormField
+                                TextFormField(
+                                  controller: _emailController,
+                                  keyboardType: TextInputType.emailAddress,
+                                  style: TextStyle(color: Colors.white),
+                                  decoration: InputDecoration(
+                                    labelText: 'Email',
+                                    labelStyle: TextStyle(color: Colors.yellow),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.yellow),
                                     ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter your email';
-                                      }
-                                      if (!value.contains('@') ||
-                                          !value.contains('.')) {
-                                        return 'Please enter a valid email';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  SizedBox(height: 16),
-                                  // Add a TextFormField widget for the password input
-                                  TextFormField(
-                                    controller: _passwordController,
-                                    obscureText: true,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: 'Password',
-                                      labelStyle:
-                                          TextStyle(color: Colors.yellow),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.yellow),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.yellow),
-                                      ),
-                                    ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please confirm your password';
-                                      }
-                                      if (value != _passwordController.text) {
-                                        return 'Passwords do not match';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  SizedBox(height: 16),
-                                  ElevatedButton(
-                                    onPressed: () async {
-                                      if (_formKey.currentState!.validate()) {
-                                        await _signUp();
-                                      }
-                                    },
-                                    child: Text('Sign Up'),
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Colors.yellow,
-                                      onPrimary: Colors.black,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.yellow),
                                     ),
                                   ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => LoginPage()),
-                                      );
-                                    },
-                                    child: Text(
-                                      'Have an account? Log in',
-                                      style: TextStyle(color: Colors.yellow),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your email';
+                                    }
+                                    if (!value.contains('@') ||
+                                        !value.contains('.')) {
+                                      return 'Please enter a valid email';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                SizedBox(height: 16),
+                                // Password TextFormField
+                                TextFormField(
+                                  controller: _passwordController,
+                                  obscureText: true,
+                                  style: TextStyle(color: Colors.white),
+                                  decoration: InputDecoration(
+                                    labelText: 'Password',
+                                    labelStyle: TextStyle(color: Colors.yellow),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.yellow),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.yellow),
                                     ),
                                   ),
-                                ],
-                              ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter a password';
+                                    }
+                                    if (!_passwordPattern.hasMatch(value)) {
+                                      return 'Password must be at least 8 characters, have an uppercase letter, a number, and a special character';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                SizedBox(height: 16),
+                                // Confirm Password TextFormField
+                                TextFormField(
+                                  controller: _confirmPasswordController,
+                                  obscureText: true,
+                                  style: TextStyle(color: Colors.white),
+                                  decoration: InputDecoration(
+                                    labelText: 'Confirm Password',
+                                    labelStyle: TextStyle(color: Colors.yellow),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.yellow),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.yellow),
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please confirm your password';
+                                    }
+                                    if (value != _passwordController.text) {
+                                      return 'Passwords do not match';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                SizedBox(height: 16),
+                                // Sign Up ElevatedButton
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      await _signUp();
+                                    }
+                                  },
+                                  child: Text('Sign Up'),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.yellow,
+                                    onPrimary: Colors.black,
+                                  ),
+                                ),
+                                // Log in TextButton
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginPage()),
+                                    );
+                                  },
+                                  child: Text(
+                                    'Have an account? Log in',
+                                    style: TextStyle(color: Colors.yellow),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ]),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -347,7 +374,9 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
+  // Method to sign up the user
   Future<void> _signUp() async {
+    // Check if the passwords match
     if (_passwordController.text != _confirmPasswordController.text) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Passwords don't match.")));
@@ -356,6 +385,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     try {
       final FirebaseAuth _auth = FirebaseAuth.instance;
+      // Attempt to create a new user
       await _auth.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
@@ -363,7 +393,7 @@ class _SignUpPageState extends State<SignUpPage> {
       // If successful, navigate to the home page
       Navigator.pushNamed(context, '/homepage');
     } on FirebaseAuthException catch (e) {
-      // Show error message if there's an exception
+      // Show an error message if there's an exception
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message!)));
     }
