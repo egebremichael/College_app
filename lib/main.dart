@@ -1,19 +1,18 @@
-// Import necessary packages
+// Import necessary packages and libraries
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'dart:io';
 import 'package:google_fonts/google_fonts.dart';
 
+// Define the main function
 void main() async {
-  // Ensure that the Flutter app is initialized
+  // Ensure that the Widgets binding is initialized
   WidgetsFlutterBinding.ensureInitialized();
-  // Initialize Firebase app
+  // Initialize the Firebase app
   await Firebase.initializeApp();
   // Run the MyApp widget
   runApp(MyApp());
@@ -24,39 +23,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Disable the debug banner
       debugShowCheckedModeBanner: false,
       routes: {
-        // Define named routes for LoginPage and HomePage widgets
-        '/': (context) => LoginPage(),
-        '/homepage': (context) => HomePage(),
+        '/': (context) => LoginPage(), // Route to the LoginPage widget
+        '/homepage': (context) => HomePage(), // Route to the HomePage widget
       },
     );
   }
 }
 
-// Define the LoginPage widget
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-// Define the state for the LoginPage widget
 class _LoginPageState extends State<LoginPage> {
-  // Define text editing controllers for email and password
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    // Return a Scaffold widget with a black background
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
-        // Add padding to the body
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          // Build the layout using a LayoutBuilder and SingleChildScrollView
           child: LayoutBuilder(
             builder:
                 (BuildContext context, BoxConstraints viewportConstraints) {
@@ -66,11 +57,9 @@ class _LoginPageState extends State<LoginPage> {
                     minHeight: viewportConstraints.maxHeight,
                   ),
                   child: Column(
-                    // Center the child widgets vertically
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      // Add a SizedBox for spacing
                       SizedBox(height: 16),
                       Center(
                         child: SizedBox(
@@ -79,9 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Image.asset('assets/images/woo_logo.jpeg'),
                         ),
                       ),
-                      // Add a SizedBox for spacing
                       SizedBox(height: 16),
-                      // Add a Text widget for the login title
                       Text(
                         'Login',
                         style: TextStyle(
@@ -90,9 +77,8 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.yellow),
                         textAlign: TextAlign.center,
                       ),
-                      // Add a SizedBox for spacing
                       SizedBox(height: 16),
-                      // Add a TextField widget for the email input
+                      SizedBox(height: 16),
                       TextField(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
@@ -108,9 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      // Add a SizedBox for spacing
                       SizedBox(height: 16),
-                      // Add a TextField widget for the password input
                       TextField(
                         controller: _passwordController,
                         obscureText: true,
@@ -185,12 +169,9 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  // Controllers for text fields
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-
-  // Key for form validation
   final _formKey = GlobalKey<FormState>();
 
   // Regular expression pattern for password validation
@@ -200,7 +181,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Set background color to black
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -210,159 +191,154 @@ class _SignUpPageState extends State<SignUpPage> {
               return SingleChildScrollView(
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
-                    minHeight: viewportConstraints
-                        .maxHeight, // Minimum height constraint for SingleChildScrollView
+                    minHeight: viewportConstraints.maxHeight,
                   ),
                   child: IntrinsicHeight(
                     child: Form(
                       key: _formKey,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          SizedBox(height: 16),
-                          // Display the logo
-                          Center(
-                            child: SizedBox(
-                              width: 150,
-                              height: 150,
-                              child: Image.asset('assets/images/woo_logo.jpeg'),
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            SizedBox(height: 16),
+                            Center(
+                              child: SizedBox(
+                                width: 150,
+                                height: 150,
+                                child:
+                                    Image.asset('assets/images/woo_logo.jpeg'),
+                              ),
                             ),
-                          ),
-                          Flexible(
-                            flex: 3,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: <Widget>[
-                                SizedBox(height: 1),
-                                // Sign Up header
-                                Text(
-                                  'Sign Up',
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.yellow),
-                                  textAlign: TextAlign.center,
-                                ),
-                                SizedBox(height: 16),
-                                // Email TextFormField
-                                TextFormField(
-                                  controller: _emailController,
-                                  keyboardType: TextInputType.emailAddress,
-                                  style: TextStyle(color: Colors.white),
-                                  decoration: InputDecoration(
-                                    labelText: 'Email',
-                                    labelStyle: TextStyle(color: Colors.yellow),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.yellow),
+                            Flexible(
+                              flex: 3,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: <Widget>[
+                                  SizedBox(height: 1),
+                                  Text(
+                                    'Sign Up',
+                                    style: TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.yellow),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  SizedBox(height: 16),
+                                  TextFormField(
+                                    controller: _emailController,
+                                    keyboardType: TextInputType.emailAddress,
+                                    style: TextStyle(color: Colors.white),
+                                    decoration: InputDecoration(
+                                      labelText: 'Email',
+                                      labelStyle:
+                                          TextStyle(color: Colors.yellow),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.yellow),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.yellow),
+                                      ),
                                     ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.yellow),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your email';
+                                      }
+                                      if (!value.contains('@') ||
+                                          !value.contains('.')) {
+                                        return 'Please enter a valid email';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  SizedBox(height: 16),
+                                  TextFormField(
+                                    controller: _passwordController,
+                                    obscureText: true,
+                                    style: TextStyle(color: Colors.white),
+                                    decoration: InputDecoration(
+                                      labelText: 'Password',
+                                      labelStyle:
+                                          TextStyle(color: Colors.yellow),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.yellow),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.yellow),
+                                      ),
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter a password';
+                                      }
+                                      if (!_passwordPattern.hasMatch(value)) {
+                                        return 'Password must be at least 8 characters, have an uppercase letter, a number, and a special character';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  SizedBox(height: 16),
+                                  TextFormField(
+                                    controller: _confirmPasswordController,
+                                    obscureText: true,
+                                    style: TextStyle(color: Colors.white),
+                                    decoration: InputDecoration(
+                                      labelText: 'Confirm Password',
+                                      labelStyle:
+                                          TextStyle(color: Colors.yellow),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.yellow),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.yellow),
+                                      ),
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please confirm your password';
+                                      }
+                                      if (value != _passwordController.text) {
+                                        return 'Passwords do not match';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  SizedBox(height: 16),
+                                  ElevatedButton(
+                                    onPressed: () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        await _signUp();
+                                      }
+                                    },
+                                    child: Text('Sign Up'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.yellow,
+                                      onPrimary: Colors.black,
                                     ),
                                   ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your email';
-                                    }
-                                    if (!value.contains('@') ||
-                                        !value.contains('.')) {
-                                      return 'Please enter a valid email';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(height: 16),
-                                // Password TextFormField
-                                TextFormField(
-                                  controller: _passwordController,
-                                  obscureText: true,
-                                  style: TextStyle(color: Colors.white),
-                                  decoration: InputDecoration(
-                                    labelText: 'Password',
-                                    labelStyle: TextStyle(color: Colors.yellow),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.yellow),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.yellow),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginPage()),
+                                      );
+                                    },
+                                    child: Text(
+                                      'Have an account? Log in',
+                                      style: TextStyle(color: Colors.yellow),
                                     ),
                                   ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter a password';
-                                    }
-                                    if (!_passwordPattern.hasMatch(value)) {
-                                      return 'Password must be at least 8 characters, have an uppercase letter, a number, and a special character';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(height: 16),
-                                // Confirm Password TextFormField
-                                TextFormField(
-                                  controller: _confirmPasswordController,
-                                  obscureText: true,
-                                  style: TextStyle(color: Colors.white),
-                                  decoration: InputDecoration(
-                                    labelText: 'Confirm Password',
-                                    labelStyle: TextStyle(color: Colors.yellow),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.yellow),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.yellow),
-                                    ),
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please confirm your password';
-                                    }
-                                    if (value != _passwordController.text) {
-                                      return 'Passwords do not match';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(height: 16),
-                                // Sign Up ElevatedButton
-                                ElevatedButton(
-                                  onPressed: () async {
-                                    if (_formKey.currentState!.validate()) {
-                                      await _signUp();
-                                    }
-                                  },
-                                  child: Text('Sign Up'),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Colors.yellow,
-                                    onPrimary: Colors.black,
-                                  ),
-                                ),
-                                // Log in TextButton
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => LoginPage()),
-                                    );
-                                  },
-                                  child: Text(
-                                    'Have an account? Log in',
-                                    style: TextStyle(color: Colors.yellow),
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ]),
                     ),
                   ),
                 ),
@@ -374,9 +350,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  // Method to sign up the user
   Future<void> _signUp() async {
-    // Check if the passwords match
     if (_passwordController.text != _confirmPasswordController.text) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Passwords don't match.")));
@@ -385,7 +359,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
     try {
       final FirebaseAuth _auth = FirebaseAuth.instance;
-      // Attempt to create a new user
       await _auth.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
@@ -393,7 +366,7 @@ class _SignUpPageState extends State<SignUpPage> {
       // If successful, navigate to the home page
       Navigator.pushNamed(context, '/homepage');
     } on FirebaseAuthException catch (e) {
-      // Show an error message if there's an exception
+      // Show error message if there's an exception
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message!)));
     }
@@ -406,42 +379,36 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex =
-      0; // index of currently selected bottom navigation bar item
-  bool _isDarkMode = true; // whether the app is in dark mode
-  String? _selectedLanguage; // the user's selected language, if any
-  Widget _homeWidget = Home(); // the widget to be displayed in the home tab
+  int _selectedIndex = 0;
+  bool _isDarkMode = true;
+  String? _selectedLanguage;
+  Widget _homeWidget = Home();
 
-  // A list of widgets for each bottom navigation bar item
   List<Widget> _widgetOptions() => [
         _homeWidget,
-        DiningMenu(),
+        Dining(),
         ShuttleSchedule(),
         CampusMap(),
         Resources(),
       ];
 
-  // Handles when a bottom navigation bar item is tapped
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
-  // Toggles the app's theme between light and dark mode
   void _toggleTheme() {
     setState(() {
       _isDarkMode = !_isDarkMode;
     });
   }
 
-  // Signs the user out and navigates to the login page
   void _signOut() async {
     await FirebaseAuth.instance.signOut();
     Navigator.pushNamedAndRemoveUntil(context, '/loginpage', (route) => false);
   }
 
-  // Updates the home widget with the user's selected language
   void _updateHomeWidget() {
     setState(() {
       _homeWidget = Home(preferredLanguage: _selectedLanguage);
@@ -461,9 +428,9 @@ class _HomePageState extends State<HomePage> {
           : ThemeData(
               brightness: Brightness.light,
               scaffoldBackgroundColor: Colors.white,
-              primaryColor: Colors.yellow,
+              primaryColor: Color(0xFFDEAB03),
               appBarTheme: AppBarTheme(
-                backgroundColor: Colors.yellow,
+                backgroundColor: Color(0xFFDEAB03),
                 textTheme: TextTheme(
                   headline6: TextStyle(
                       color: Colors.black,
@@ -517,14 +484,22 @@ class _HomePageState extends State<HomePage> {
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              DrawerHeader(
-                child: Text('Settings'),
-                decoration: BoxDecoration(
-                  color: Color(0xFFB88A00),
+              Container(
+                height: 150,
+                child: DrawerHeader(
+                  child: Text(
+                    'Settings',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    color: Color(0xFFB88A00),
+                  ),
                 ),
               ),
               ListTile(
-                title: Text('Toggle Theme'),
+                title: Text('Switch Appearance'),
                 trailing: Container(
                   width: 48.0,
                   height: 48.0,
@@ -649,17 +624,25 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.yellow,
+          selectedItemColor: Color(0xFFDEAB03),
           onTap: _onItemTapped,
         ),
         drawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              DrawerHeader(
-                child: Text('Menu'),
-                decoration: BoxDecoration(
-                  color: Color(0xFFB88A00),
+              Container(
+                height: 150,
+                child: DrawerHeader(
+                  child: Text(
+                    'Menu',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    color: Color(0xFFB88A00),
+                  ),
                 ),
               ),
               ListTile(
@@ -681,14 +664,10 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-// A stateless widget for the home page.
 class Home extends StatelessWidget {
-  // The preferred language for the home page, passed in as a parameter.
   final String? preferredLanguage;
-  // Constructs a new instance of the [Home] widget.
   const Home({super.key, this.preferredLanguage});
 
-  // Returns the language code for the given language name.
   String languageCodeFromName(String languageName) {
     switch (languageName) {
       case 'English':
@@ -721,12 +700,12 @@ class Home extends StatelessWidget {
         return 'in';
       case 'Twi':
         return 'tw';
+
       default:
         return 'en';
     }
   }
 
-  // Returns a welcome message in the user's preferred language, or the device's language if no preferred language is selected.
   String getWelcomeMessage(String languageCode) {
     switch (languageCode) {
       case 'en':
@@ -770,16 +749,13 @@ class Home extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
-    // Determine the language code to use for the welcome message.
     String languageCode = Localizations.localeOf(context).languageCode;
     String displayLanguageCode = preferredLanguage != null
         ? languageCodeFromName(preferredLanguage!)
         : languageCode;
 
-    // Build the main widget for the screen.
     return Stack(
       children: [
-        // Background image container
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -788,10 +764,8 @@ class Home extends StatelessWidget {
             ),
           ),
         ),
-        // Column containing the welcome message and the event information
         Column(
           children: [
-            // Welcome message container
             Expanded(
               flex: 2,
               child: Container(
@@ -804,12 +778,11 @@ class Home extends StatelessWidget {
                   child: Text(
                     '${getWelcomeMessage(displayLanguageCode)}',
                     style: GoogleFonts.crimsonPro(
-                        fontSize: 26, color: Colors.white),
+                        fontSize: 30, color: Colors.white),
                   ),
                 ),
               ),
             ),
-            // Event information container
             Expanded(
               flex: 8,
               child: Padding(
@@ -829,37 +802,32 @@ class Home extends StatelessWidget {
                         crossAxisAlignment:
                             CrossAxisAlignment.start, // Align text to the left
                         children: [
-                          // Upcoming Event title
                           Text(
-                            'Upcoming Event:',
+                            'Upcoming Events:',
                             style: TextStyle(
-                                fontSize: 24,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
                           SizedBox(height: 8),
-                          // Event 1
                           Text(
                             'Regal Gala - April 28, 8-10 pm Knowlton Commons',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           SizedBox(height: 4),
-                          // Event 2
                           Text(
                             'Last day of classes - May 2',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           SizedBox(height: 4),
                           SizedBox(height: 8),
-                          // Event 3
                           Text(
                             'Reading Days - May 3',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           SizedBox(height: 8),
-                          // Event 4
                           Text(
-                            'Exam week - May 4 to May 9',
+                            'Exam Week - May 4 - May 9',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ],
@@ -876,151 +844,400 @@ class Home extends StatelessWidget {
   }
 }
 
-class AcademicDeadlines extends StatelessWidget {
+class AcademicDeadlines extends StatefulWidget {
+  @override
+  _AcademicDeadlinesState createState() => _AcademicDeadlinesState();
+}
+
+class _AcademicDeadlinesState extends State<AcademicDeadlines> {
+  List<Map<String, String>> deadlines = [
+    {
+      'name': 'Classes Begin',
+      'date': 'Wednesday, January 11, 2023',
+    },
+    {
+      'name': 'MLK Teach-In',
+      'date': 'Monday, January 16, 2023',
+    },
+    {
+      'name': 'Last Day to Add a First Half Semester Class',
+      'date': 'Tuesday, January 17, 2023',
+    },
+    {
+      'name': 'Last Day to Add a Full Semester Class',
+      'date': 'Tuesday, January 24, 2023',
+    },
+    {
+      'name': 'Last Day to Drop a First Half Semester Class',
+      'date': 'Tuesday, January 31, 2023',
+    },
+    {
+      'name': 'Last Day to Declare a Major',
+      'date': 'Friday, February 10, 2023',
+    },
+    {
+      'name': 'Last Day to Declare Audit Option',
+      'date': 'Tuesday, February 21, 2023',
+    },
+    {
+      'name': 'Last Day to Drop Full Semester Class',
+      'date': 'Tuesday, February 21, 2023',
+    },
+    {
+      'name': 'Last Day to Declare Pass/Fail (S/NC) Option',
+      'date': 'Tuesday, February 21, 2023',
+    },
+    {
+      'name': 'First Day of Class for Second Half Semester Class',
+      'date': 'Wednesday, March 1, 2023',
+    },
+    {
+      'name': 'First Half Class Grade Deadline',
+      'date': 'Friday, March 3, 2023',
+    },
+    {
+      'name': 'Last Day to Add Second Half Semester Class',
+      'date': 'Tuesday, March 7, 2023',
+    },
+    {
+      'name': 'Senior I.S. Due to Registrar\'s Office',
+      'date': 'Monday, March 27, 2023 by 5:00 p.m',
+    },
+    {
+      'name': 'Advising Conferences: Class of 2024',
+      'date': 'Monday, March 27 – Friday, March 31, 2023',
+    },
+    {
+      'name': 'Class of 2024 Registration',
+      'date': 'Monday, April 3 – Wednesday, April 5, 2023',
+    },
+    {
+      'name': 'Advising Conferences: Class of 2025',
+      'date': 'Monday, April 3 – Friday, April 7, 2023',
+    },
+    {
+      'name': 'Last Day to Drop a Second Half Semester Class',
+      'date': 'Tuesday, April 4, 2023',
+    },
+    {
+      'name': 'Class of 2025 Registration',
+      'date': 'Monday, April 10 – Wednesday, April 12, 2023',
+    },
+    {
+      'name': 'Advising Conferences: Class of 2026',
+      'date': 'Monday, April 10 – Friday, April 14, 2023',
+    },
+    {
+      'name': 'Class of 2026 Registration',
+      'date': 'Monday, April 17 – Thursday, April 20, 2023',
+    },
+    {
+      'name': 'I.S. Symposium',
+      'date': 'Friday, April 21, 2023',
+    },
+    {
+      'name': 'Open Enrollment',
+      'date': 'Monday, April 24 – Tuesday, May 2, 2023',
+    },
+    {
+      'name': 'Spring Break',
+      'date': 'Monday, May 15 – Sunday, June 4, 2023',
+    },
+    {
+      'name': 'Last Day to Withdraw Full Semester Class with Petition',
+      'date': 'Tuesday, May 2, 2023',
+    },
+    {
+      'name': 'Last Day of Classes',
+      'date': 'Tuesday, May 2023',
+    },
+    {
+      'name': 'Final Examinations',
+      'date':
+          'Thursday, May 4 – Friday May 5, 2023, Monday, May 8 – Tuesday May 9, 2023',
+    },
+    {
+      'name': 'Senior Grades Due',
+      'date': 'Wednesday, May 10, 2023, noon',
+    },
+    {
+      'name': 'Commencement',
+      'date': 'Saturday, May 13, 2023',
+    },
+    {
+      'name': 'Final Grades Due',
+      'date': 'Monday, May 15, 2023, noon',
+    },
+    {
+      'name': 'Spring Semester Incompletes - Student\'s Final Work Due',
+      'date': 'Tuesday, May 30, 2023',
+    },
+    {
+      'name': 'Spring Semester Incompletes - Faculty\'s Final Grade Due',
+      'date': 'Tuesday, June 6, 2023',
+    },
+  ];
+
+  Map<String, String>? selectedDeadline;
+
+  Future<void> _showDeadlinesMenu(BuildContext context) async {
+    final RenderBox button = context.findRenderObject() as RenderBox;
+    final RenderBox overlay =
+        Overlay.of(context)!.context.findRenderObject() as RenderBox;
+    final RelativeRect position = RelativeRect.fromRect(
+      Rect.fromPoints(
+        button.localToGlobal(Offset.zero, ancestor: overlay),
+        button.localToGlobal(button.size.bottomRight(Offset.zero),
+            ancestor: overlay),
+      ),
+      Offset.zero & overlay.size,
+    );
+
+    Map<String, String>? deadline = await showMenu<Map<String, String>>(
+      context: context,
+      position: position,
+      items: deadlines.map((deadline) {
+        return PopupMenuItem<Map<String, String>>(
+          value: deadline,
+          child: Row(
+            children: [
+              Flexible(child: Text(deadline['name']!)),
+            ],
+          ),
+        );
+      }).toList(),
+    );
+
+    if (deadline != null) {
+      setState(() {
+        selectedDeadline = deadline;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Define the app bar with a title and a background color
       appBar: AppBar(
-        title: Text(
-          'Academic Deadlines',
-          style: TextStyle(
-            fontFamily: 'Helvetica',
-          ),
-        ),
+        title: Text('Academic Deadlines'),
         backgroundColor: Colors.grey[850],
       ),
-      // Use a stack to layer multiple widgets on top of each other
-      body: Stack(
-        children: [
-          // Display the background image
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/woo_img2.jpeg'),
-                fit: BoxFit.cover,
-              ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/woo_img2.jpeg"),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.9),
+              BlendMode.darken,
             ),
           ),
-          // Add a semi-transparent black layer on top of the image
-          Opacity(
-            opacity: 0.8,
-            child: Container(
-              color: Colors.black,
-            ),
-          ),
-          // Use a Positioned.fill widget to fill the available space and add padding
-          Positioned.fill(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Display the title for the academic deadlines
-                    Text(
-                      '2022-2023 Spring Semester Deadlines',
-                      style: TextStyle(
-                        fontFamily: 'Helvetica',
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Spacer(flex: 5),
+              GestureDetector(
+                onTap: () => _showDeadlinesMenu(context),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.white, width: 1),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        selectedDeadline == null
+                            ? 'Select a deadline'
+                            : selectedDeadline!['name']!,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_drop_down,
                         color: Colors.white,
                       ),
-                    ),
-                    SizedBox(height: 16),
-                    // Display the list of deadlines
-                    Text('Fall Semester Incompletes',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text('  Student’s Final Work Due: Friday, January 6, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              if (selectedDeadline != null)
+                Text(
+                  '${selectedDeadline!['name']} is ${selectedDeadline!['date']}.',
+                  style: TextStyle(fontSize: 20, color: Colors.white),
+                ),
+              Spacer(flex: 10),
+              Text(
+                'Taken from the college website:',
+                style: TextStyle(
+                    fontSize: 12,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.white),
+              ),
+              RichText(
+                text: TextSpan(
+                  text: 'https://inside.wooster.edu/registrar/deadlines/',
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontSize: 12,
+                    color: Color(0xFFDEAB03),
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () async {
+                      final url =
+                          'https://inside.wooster.edu/registrar/deadlines/';
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class DiningLocation {
+  final String name;
+  final String image;
+  final String times;
+  final String menuUrl;
+  final String mealSwipesUrl;
+  final String lateNightMealUrl;
+
+  DiningLocation({
+    required this.name,
+    required this.image,
+    required this.times,
+    this.menuUrl = '',
+    this.mealSwipesUrl = '',
+    this.lateNightMealUrl = '',
+  });
+}
+
+class Dining extends StatelessWidget {
+  final List<DiningLocation> diningLocations = [
+    DiningLocation(
+      name: 'Lowry Center Dining Hall',
+      image: 'assets/images/lowry.png',
+      times: 'Monday – Friday\n\n7:00 a.m. - 8:00 p.m.',
+      menuUrl:
+          'https://sites.google.com/creativedining.com/dineatwooster/menus-locations/menus',
+      mealSwipesUrl:
+          'https://wooster.avrocustomer.com/login.aspx?ReturnUrl=%2flogin',
+    ),
+    DiningLocation(
+      name: 'Knowlton Cafe',
+      image: 'assets/images/knowlton.png',
+      times: 'Monday – Friday\n\n7:30 a.m. - 6:00 p.m.',
+    ),
+    DiningLocation(
+      name: 'Old Main Cafe',
+      image: 'assets/images/oldmain.png',
+      times: 'Monday – Friday\n\n7:30 a.m. - 6:00 p.m.',
+    ),
+    DiningLocation(
+      name: "Mom's Late Night",
+      image: 'assets/images/moms.png',
+      times: 'Monday – Friday\n\n8:00 p.m. - 1:00 a.m.',
+      lateNightMealUrl: 'https://collegeofwooster.trufflestg.com/near-location',
+    ),
+    DiningLocation(
+      name: "MacLeod's Convenience Store & Coffee Shop",
+      image: 'assets/images/cstore.png',
+      times:
+          'Monday - Friday\n\n7:00 a.m. - midnight\n\nSaturday - Sunday\n\n10:00 a.m. - midnight',
+    ),
+  ];
+
+  void _launchUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: diningLocations.length,
+      itemBuilder: (context, index) {
+        final diningLocation = diningLocations[index];
+        return Card(
+          child: Column(
+            children: [
+              Image.asset(diningLocation.image),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
-                        '  Faculty’s Final Grade Due: Friday, January 13, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    Text('  Classes Begin: Wednesday, January 11, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    // More deadline items
-                    // ...
-                    Text('Taken from the college website',
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
+                      diningLocation.name,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      diningLocation.times,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    if (diningLocation.menuUrl.isNotEmpty ||
+                        diningLocation.mealSwipesUrl.isNotEmpty)
+                      SizedBox(height: 8),
+                    if (diningLocation.menuUrl.isNotEmpty)
+                      ElevatedButton(
+                          onPressed: () => _launchUrl(diningLocation.menuUrl),
+                          child: Text('Check Menu'),
+                          style: ElevatedButton.styleFrom(
+                              primary: Color(0xFFDEAB03))),
+                    if (diningLocation.mealSwipesUrl.isNotEmpty)
+                      ElevatedButton(
+                          onPressed: () =>
+                              _launchUrl(diningLocation.mealSwipesUrl),
+                          child: Text('Check Meal Swipes'),
+                          style: ElevatedButton.styleFrom(
+                              primary: Color(0xFFDEAB03))),
+                    if (diningLocation.lateNightMealUrl.isNotEmpty)
+                      ElevatedButton(
+                        onPressed: () =>
+                            _launchUrl(diningLocation.lateNightMealUrl),
+                        child: Text('Order a Late Night Meal'),
+                        style: ElevatedButton.styleFrom(
+                            primary: Color(0xFFDEAB03)),
+                      ),
                   ],
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
 
-class DiningMenu extends StatefulWidget {
-  @override
-  _DiningMenuState createState() => _DiningMenuState();
-}
-
-class _DiningMenuState extends State<DiningMenu> {
-  String? _pdfPath;
-
-  @override
-  void initState() {
-    super.initState();
-    loadPdf();
-  }
-
-  // Loads the PDF from assets and saves it to temporary directory
-  Future<void> loadPdf() async {
-    final pdfFile =
-        await copyAssetToTempDirectory('assets/documents/dining.pdf');
-    setState(() {
-      _pdfPath = pdfFile.path;
-    });
-  }
-
-  // Copies the asset PDF to the temporary directory
-  Future<File> copyAssetToTempDirectory(String assetPath) async {
-    final byteData = await rootBundle.load(assetPath);
-    final tempDir = await getTemporaryDirectory();
-    final file = File('${tempDir.path}/${assetPath.split('/').last}');
-    await file.writeAsBytes(byteData.buffer
-        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-    return file;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pdfPath == null
-          ? Center(child: CircularProgressIndicator())
-          : PDFView(
-              filePath: _pdfPath!,
-              fitEachPage: true,
-              defaultPage: 0,
-              pageSnap: true,
-            ),
-    );
-  }
-}
-
-// Define a Shuttle class with location and schedule attributes
 class Shuttle {
   final String location;
   final int schedule;
 
-  // Constructor for the Shuttle class
   Shuttle({required this.location, required this.schedule});
 }
 
-// Create a list of Shuttle objects representing shuttle stops
 final List<Shuttle> shuttles = [
   Shuttle(location: 'Spink & Nold', schedule: 0),
   Shuttle(location: 'Discount Drug Mart', schedule: 1),
@@ -1050,22 +1267,20 @@ final List<Shuttle> shuttles = [
   Shuttle(location: 'OneEighty', schedule: 59),
 ];
 
-// Calculate the remaining time until the next shuttle arrives at a given location
 int _calculateRemainingTime(String location) {
-  // Calculate the remaining time until the next shuttle arrives at a given location
   Shuttle shuttle =
       shuttles.firstWhere((shuttle) => shuttle.location == location);
-  // Get the current time
   DateTime currentTime = DateTime.now();
   int currentHour = currentTime.hour;
   int currentMinute = currentTime.minute;
-// If it's past 10 PM, set the remaining time to -1 to indicate that the shuttle service has ended
+
+  // If it's past 10 PM, set the remaining time to -1
   if (currentHour >= 22) {
     return -1;
   }
 
   int remainingTime = 0;
-  // Calculate the remaining time until the shuttle arrives at the given location
+
   if (shuttle.schedule > currentMinute) {
     remainingTime = shuttle.schedule - currentMinute;
   } else {
@@ -1075,13 +1290,11 @@ int _calculateRemainingTime(String location) {
   return remainingTime;
 }
 
-// Define a StatefulWidget for the Shuttle Schedule screen
 class ShuttleSchedule extends StatefulWidget {
   @override
   _ShuttleScheduleState createState() => _ShuttleScheduleState();
 }
 
-// Define a State for the Shuttle Schedule screen
 class _ShuttleScheduleState extends State<ShuttleSchedule> {
   String? _pickupLocation;
   String? _dropoffLocation;
@@ -1089,18 +1302,17 @@ class _ShuttleScheduleState extends State<ShuttleSchedule> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Set the app bar title to 'Shuttle Schedule
-      appBar: AppBar(title: Text('Shuttle Schedule')),
+      appBar: AppBar(title: Text('Wooster Transit Schedule')),
       body: Stack(
         children: [
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                    'assets/images/shuttle_bg.jpeg'), // Replace with your transit image
+                    'assets/images/shuttle.png'), // Replace with your transit image
                 fit: BoxFit.cover,
                 colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.1), BlendMode.dstATop),
+                    Colors.black.withOpacity(0.2), BlendMode.dstATop),
               ),
             ),
           ),
@@ -1167,16 +1379,33 @@ class _CampusMapState extends State<CampusMap> {
   final LatLng _woosterLatLng =
       LatLng(40.808884, -81.933188); // College of Wooster coordinates
 
-  Set<Marker> _markers = {}; // Adds markers to locations
+  Set<Marker> _markers = {}; // Add markers for your locations
 
   @override
   void initState() {
     super.initState();
-    _markers.add(Marker(
-      markerId: MarkerId('destination'),
-      position: LatLng(40.808884, -81.933188),
-      onTap: () => _launchMapsDirections(),
-    ));
+
+    // Add custom markers with labels for important locations on the campus
+    _markers.addAll([
+      _createMarker(
+          id: 'library',
+          position: LatLng(40.808884, -81.933188),
+          label: 'Library',
+          onTap: () => _launchMapsDirections('40.808884,-81.933188')),
+    ]);
+  }
+
+  Marker _createMarker(
+      {required String id,
+      required LatLng position,
+      required String label,
+      VoidCallback? onTap}) {
+    return Marker(
+      markerId: MarkerId(id),
+      position: position,
+      infoWindow: InfoWindow(title: label),
+      onTap: onTap,
+    );
   }
 
   @override
@@ -1188,7 +1417,7 @@ class _CampusMapState extends State<CampusMap> {
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
           target: _woosterLatLng,
-          zoom: 17,
+          zoom: 16, // Adjust zoom level to fit the entire campus
         ),
         mapType: MapType.normal,
         myLocationEnabled: true,
@@ -1201,9 +1430,7 @@ class _CampusMapState extends State<CampusMap> {
     );
   }
 
-  Future<void> _launchMapsDirections() async {
-    final destination =
-        '40.808884,-81.933188'; // The LatLng values of the college
+  Future<void> _launchMapsDirections(String destination) async {
     final url =
         'https://www.google.com/maps/dir/?api=1&destination=$destination&travelmode=walking';
 
@@ -1215,9 +1442,7 @@ class _CampusMapState extends State<CampusMap> {
   }
 }
 
-// displays a list of campus resources.
 class Resources extends StatelessWidget {
-  // A list of strings representing the names of various campus services.
   final List<String> services = [
     'Wellness Center',
     'Gym',
@@ -1225,10 +1450,9 @@ class Resources extends StatelessWidget {
     'APEX',
     'Academic Resource Center',
     'Title IX',
-    'Campus Safety',
+    'Campus Safety' // Add more services here
   ];
 
-  // A list of strings containing the corresponding URLs for each campus service.
   final List<String> serviceUrls = [
     'https://wooster.edu/wellness-center/',
     'https://www.woosterathletics.com/scotcenter/index',
@@ -1236,12 +1460,9 @@ class Resources extends StatelessWidget {
     'https://inside.wooster.edu/apex/',
     'https://inside.wooster.edu/arc/',
     'https://inside.wooster.edu/title-ix/',
-    'https://inside.wooster.edu/safety/',
+    'https://inside.wooster.edu/safety/' // Add corresponding URLs here
   ];
 
-  // An asynchronous function that takes a URL string as its argument.
-  // It checks if the given URL can be launched, and if so, launches it.
-  // Otherwise, it throws an exception with an error message.
   Future<void> _launchUrl(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -1250,7 +1471,6 @@ class Resources extends StatelessWidget {
     }
   }
 
-  // displays a list of campus resources with their corresponding URLs.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1283,6 +1503,7 @@ class Resources extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
+                      // You can handle each service's onTap event here
                       _launchUrl(serviceUrls[index]);
                     },
                   );
