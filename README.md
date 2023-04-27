@@ -17,7 +17,7 @@ To get started with this project, first clone the repository and make sure you h
 1. Clone the repository:
 
 ```
-git clone https://github.com/yourusername/Juniot_IS.git
+git clone https://github.com/yourusername/Junior_IS.git
 ```
 
 2. Change into the project directory:
