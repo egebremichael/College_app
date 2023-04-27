@@ -4,6 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/gestures.dart';
+import 'dart:io';
+import 'dart:ui';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -1411,9 +1413,6 @@ class _CampusMapState extends State<CampusMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Wooster Campus Map'),
-      ),
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
           target: _woosterLatLng,
