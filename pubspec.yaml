@@ -71,8 +71,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/documents/dining.pdf
-    - assets/documents/campusmap.pdf
 
   # To add assets to your application, add an assets section, like this:
   # assets:
