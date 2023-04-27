@@ -34,15 +34,18 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// represents the login screen of the app.
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
+// manages the mutable state for the LoginPage widget.
 class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  // Build the login screen with email and password inputs and a login button.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,6 +151,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  // Perform the login action using Firebase authentication.
   Future<void> _login() async {
     try {
       final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -165,11 +169,13 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
+// represents the sign up screen of the app.
 class SignUpPage extends StatefulWidget {
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
 
+// manages the mutable state for the SignUpPage widget.
 class _SignUpPageState extends State<SignUpPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -180,6 +186,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final RegExp _passwordPattern =
       RegExp(r'^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$');
 
+  // Build the sign up screen with email, password, and confirm password inputs, and a sign up button.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -352,6 +359,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
+  // Perform the sign-up action using Firebase authentication.
   Future<void> _signUp() async {
     if (_passwordController.text != _confirmPasswordController.text) {
       ScaffoldMessenger.of(context)
@@ -375,17 +383,20 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 }
 
+// HomePage StatefulWidget declaration
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
+// _HomePageState class declaration
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   bool _isDarkMode = true;
   String? _selectedLanguage;
   Widget _homeWidget = Home();
 
+  // Define the list of widgets to be displayed
   List<Widget> _widgetOptions() => [
         _homeWidget,
         Dining(),
@@ -394,29 +405,34 @@ class _HomePageState extends State<HomePage> {
         Resources(),
       ];
 
+  // Change the selected widget when an item is tapped
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
+  // Toggle theme between dark and light mode
   void _toggleTheme() {
     setState(() {
       _isDarkMode = !_isDarkMode;
     });
   }
 
+  // Sign out user and navigate to login page
   void _signOut() async {
     await FirebaseAuth.instance.signOut();
     Navigator.pushNamedAndRemoveUntil(context, '/loginpage', (route) => false);
   }
 
+  // Update the Home widget with a new preferred welcome language
   void _updateHomeWidget() {
     setState(() {
       _homeWidget = Home(preferredLanguage: _selectedLanguage);
     });
   }
 
+  // Build method to create MaterialApp and its widgets
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -482,6 +498,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+        // Build the endDrawer containing settings
         endDrawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
@@ -500,6 +517,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+              // Toggle appearance between dark and light mode
               ListTile(
                 title: Text('Switch Appearance'),
                 trailing: Container(
@@ -516,6 +534,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+              // Choose preferred welcome language
               ListTile(
                 title: Text('Preferred Welcome Language'),
                 trailing: DropdownButton<String>(
@@ -590,6 +609,7 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
+              // Log out and navigate to login page
               ListTile(
                 title: Text('Logout'),
                 onTap: () {
@@ -600,6 +620,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+        // Display the selected widget in the body
         body: Center(child: _widgetOptions().elementAt(_selectedIndex)),
         bottomNavigationBar: BottomNavigationBar(
           unselectedItemColor: Colors.grey[500],
@@ -629,6 +650,7 @@ class _HomePageState extends State<HomePage> {
           selectedItemColor: Color(0xFFDEAB03),
           onTap: _onItemTapped,
         ),
+        // Build the main navigation drawer
         drawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
@@ -647,6 +669,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+              // Navigate to Academic Deadlines page
               ListTile(
                 title: Text('Academic Deadlines'),
                 onTap: () {
@@ -666,10 +689,13 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+// displays the home page with a welcome message and upcoming events
 class Home extends StatelessWidget {
   final String? preferredLanguage;
+  // Constructor with optional language parameter
   const Home({super.key, this.preferredLanguage});
 
+  // Map language names to their respective language codes
   String languageCodeFromName(String languageName) {
     switch (languageName) {
       case 'English':
@@ -708,6 +734,7 @@ class Home extends StatelessWidget {
     }
   }
 
+  // Return a welcome message in the specified language code
   String getWelcomeMessage(String languageCode) {
     switch (languageCode) {
       case 'en':
@@ -750,6 +777,7 @@ class Home extends StatelessWidget {
     }
   }
 
+  // Build the Home widget with a welcome message and upcoming events
   Widget build(BuildContext context) {
     String languageCode = Localizations.localeOf(context).languageCode;
     String displayLanguageCode = preferredLanguage != null
@@ -846,12 +874,14 @@ class Home extends StatelessWidget {
   }
 }
 
+// StatefulWidget that displays a list of academic deadlines
 class AcademicDeadlines extends StatefulWidget {
   @override
   _AcademicDeadlinesState createState() => _AcademicDeadlinesState();
 }
 
 class _AcademicDeadlinesState extends State<AcademicDeadlines> {
+  // List of academic deadlines, each containing a name and a date
   List<Map<String, String>> deadlines = [
     {
       'name': 'Classes Begin',
@@ -980,8 +1010,10 @@ class _AcademicDeadlinesState extends State<AcademicDeadlines> {
     },
   ];
 
+  // Stores the selected deadline from the dropdown menu
   Map<String, String>? selectedDeadline;
 
+  // Function to show the deadlines menu and update the selected deadline
   Future<void> _showDeadlinesMenu(BuildContext context) async {
     final RenderBox button = context.findRenderObject() as RenderBox;
     final RenderBox overlay =
@@ -995,6 +1027,7 @@ class _AcademicDeadlinesState extends State<AcademicDeadlines> {
       Offset.zero & overlay.size,
     );
 
+    // Builds the UI for the AcademicDeadlines screen
     Map<String, String>? deadline = await showMenu<Map<String, String>>(
       context: context,
       position: position,
@@ -1112,6 +1145,7 @@ class _AcademicDeadlinesState extends State<AcademicDeadlines> {
   }
 }
 
+// Class representing a dining location
 class DiningLocation {
   final String name;
   final String image;
@@ -1130,7 +1164,9 @@ class DiningLocation {
   });
 }
 
+// StatelessWidget that displays a list of dining locations
 class Dining extends StatelessWidget {
+  // List of dining location instances
   final List<DiningLocation> diningLocations = [
     DiningLocation(
       name: 'Lowry Center Dining Hall',
@@ -1165,6 +1201,7 @@ class Dining extends StatelessWidget {
     ),
   ];
 
+  // Function to launch the provided URL in a browser
   void _launchUrl(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -1173,6 +1210,7 @@ class Dining extends StatelessWidget {
     }
   }
 
+  // Builds the UI for the Dining screen
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -1233,6 +1271,7 @@ class Dining extends StatelessWidget {
   }
 }
 
+// Class representing a shuttle stop
 class Shuttle {
   final String location;
   final int schedule;
@@ -1240,6 +1279,7 @@ class Shuttle {
   Shuttle({required this.location, required this.schedule});
 }
 
+// List of shuttle stop instances
 final List<Shuttle> shuttles = [
   Shuttle(location: 'Spink & Nold', schedule: 0),
   Shuttle(location: 'Discount Drug Mart', schedule: 1),
@@ -1269,6 +1309,7 @@ final List<Shuttle> shuttles = [
   Shuttle(location: 'OneEighty', schedule: 59),
 ];
 
+// Function to calculate the remaining time until a shuttle arrives at a given location
 int _calculateRemainingTime(String location) {
   Shuttle shuttle =
       shuttles.firstWhere((shuttle) => shuttle.location == location);
@@ -1292,15 +1333,19 @@ int _calculateRemainingTime(String location) {
   return remainingTime;
 }
 
+// StatefulWidget representing the shuttle schedule screen
 class ShuttleSchedule extends StatefulWidget {
   @override
   _ShuttleScheduleState createState() => _ShuttleScheduleState();
 }
 
+// State object for the ShuttleSchedule StatefulWidget
 class _ShuttleScheduleState extends State<ShuttleSchedule> {
+  // Variables to store the selected pickup and dropoff locations
   String? _pickupLocation;
   String? _dropoffLocation;
 
+  // Builds the UI for the shuttle schedule screen
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1370,11 +1415,13 @@ class _ShuttleScheduleState extends State<ShuttleSchedule> {
   }
 }
 
+// StatefulWidget for the campus map screen
 class CampusMap extends StatefulWidget {
   @override
   _CampusMapState createState() => _CampusMapState();
 }
 
+// State object for the CampusMap StatefulWidget
 class _CampusMapState extends State<CampusMap> {
   late GoogleMapController _controller;
 
@@ -1383,11 +1430,11 @@ class _CampusMapState extends State<CampusMap> {
 
   Set<Marker> _markers = {}; // Add markers for your locations
 
+  // Initializes the state with custom markers for important locations on the campus
   @override
   void initState() {
     super.initState();
 
-    // Add custom markers with labels for important locations on the campus
     _markers.addAll([
       _createMarker(
           id: 'library',
@@ -1397,6 +1444,7 @@ class _CampusMapState extends State<CampusMap> {
     ]);
   }
 
+  // Creates a marker with the given attributes
   Marker _createMarker(
       {required String id,
       required LatLng position,
@@ -1410,6 +1458,7 @@ class _CampusMapState extends State<CampusMap> {
     );
   }
 
+  // Builds the UI for the campus map screen
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1429,6 +1478,7 @@ class _CampusMapState extends State<CampusMap> {
     );
   }
 
+  // Function to launch Google Maps directions
   Future<void> _launchMapsDirections(String destination) async {
     final url =
         'https://www.google.com/maps/dir/?api=1&destination=$destination&travelmode=walking';
@@ -1441,7 +1491,9 @@ class _CampusMapState extends State<CampusMap> {
   }
 }
 
+// StatelessWidget for the resources screen
 class Resources extends StatelessWidget {
+  // Lists of campus services and their corresponding URLs
   final List<String> services = [
     'Wellness Center',
     'Gym',
@@ -1449,9 +1501,10 @@ class Resources extends StatelessWidget {
     'APEX',
     'Academic Resource Center',
     'Title IX',
-    'Campus Safety' // Add more services here
+    'Campus Safety'
   ];
 
+  // Function to launch the URL in the browser
   final List<String> serviceUrls = [
     'https://wooster.edu/wellness-center/',
     'https://www.woosterathletics.com/scotcenter/index',
@@ -1459,7 +1512,7 @@ class Resources extends StatelessWidget {
     'https://inside.wooster.edu/apex/',
     'https://inside.wooster.edu/arc/',
     'https://inside.wooster.edu/title-ix/',
-    'https://inside.wooster.edu/safety/' // Add corresponding URLs here
+    'https://inside.wooster.edu/safety/'
   ];
 
   Future<void> _launchUrl(String url) async {
@@ -1470,6 +1523,7 @@ class Resources extends StatelessWidget {
     }
   }
 
+  // Builds the UI for the resources screen
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1502,7 +1556,6 @@ class Resources extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      // You can handle each service's onTap event here
                       _launchUrl(serviceUrls[index]);
                     },
                   );
