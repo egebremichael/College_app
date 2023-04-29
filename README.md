@@ -12,7 +12,7 @@ A Flutter-based mobile application designed to help students and faculty navigat
 
 ## Installation
 
-To get started with this project, first clone the repository and make sure you have Flutter installed on your development machine.
+To get started, first clone the repository and make sure you have Flutter installed on your development machine.
 
 1. Clone the repository:
 
@@ -180,15 +180,15 @@ When you open the app, you will be greeted by the Home screen, which displays th
 
 ### Dining
 
-To access information about on-campus dining options, tap the "Dining" icon. This will open the Dining screen where you can see the dining news. Simply scroll through the list to view the news and you can also find a link to check flex balance and meal swipes.
+To access information about on-campus dining options, tap the "Dining" icon. This will open the Dining screen where you can see all the dining locations on-campus. Simply scroll through the list to view the options and you can also find links to check flex balance and meal swipes, check the menu, and order a late night meal.
 
 ### Shuttle Schedule
 
-To view the shuttle schedule, tap the "Shuttle Schedule" icon. On the Shuttle Schedule screen, you can select your pickup and dropoff locations to see the estimated time for your shuttle arrival and departure. 
+To view the shuttle schedule, tap the "Shuttle Schedule" icon. On the Shuttle Schedule screen, you can select your pickup and dropoff locations to see the estimated time for your shuttle arrival. 
 
 ### Campus Map
 
-To view the campus map, tap the "Map" icon. It uses Google Maps API and is linked to the internet.(not fully implemented)
+To view the campus map, tap the "Map" icon. It uses Google Maps API and is linked to the internet.
 
 ### Resources
 
@@ -202,15 +202,13 @@ To access the settings which contains the light/dark mode, changing welcome mess
 
 ### Additional Feature
 
-To access semester academic deadlines, click on the hamburger menu and click on the academic deadlines tab. (doesn't look so good right now)
+To access semester academic deadlines, click on the hamburger menu and click on the academic deadlines tab. 
 
 ## Limitations
-
-The maps don't work as expected didn't have enough time to fully implement the Google maps API.
-The Academic deadlines are formatted in a bad way and is very hard to read ans aesthetically unpleasing. 
+ 
 The features in the resources tab aren't displayed when light mode is enabled. 
 Limited number of languages available for selection due to lack of time for implememnting the Google translate API. 
-The Dining page only shows the dining menu pdf and it's hard to find the link to check meal swipes and flex balance. 
+
 
 ## Troubleshooting Cocoapods Error
 
